@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 Tutorial</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script>
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true
+            },
+            "HTML-CSS": { scale: 90 },
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js" integrity="sha512-AMl4wfwAmDM1lsQvVBBRHYENn1FR8cfOTpt8QVbb/P55mYOdahHD4LmHM1W55pNe3j/3od8ELzPf/8eNkkjISQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Observer.min.js" integrity="sha512-7xTD1meeGGoAzwZKA0Z8YelV3qAvRltuwACWXpnxtneF7VAMztOTAi3t4laVSaE4Znq4LMPeGUIYWEvKEk5r3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js" integrity="sha512-S6SXKUZ11xkCoD/UuhdXG4B4iiCXng+xW2KCx0lgfQqmdqtjqGgm4WChdYIhO1F/CmH21vnkSUvPEgXNgDwkjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div class="intro">
+        <h1>An Introduction to Sampling Distributions</h1>
+        <h1>By Arjun</h1>
+    </div>
+
+    <div class="math">
+      <h2>Inferential vs Descriptive Statistics</h2>
+      <table>
+        <tr>
+            <th>Aspect</th>
+            <th>Descriptive Statistics</th>
+            <th>Inferential Statistics</th>
+        </tr>
+        <tr>
+            <td>Purpose</td>
+            <td>Summarizes and describes data</td>
+            <td>Draws conclusions about data</td>
+        </tr>
+        <tr>
+            <td>Data Set</td>
+            <td>Entire data set</td>
+            <td>Sample of data</td>
+        </tr>
+        <tr>
+            <td>Examples</td>
+            <td>Mean, median, mode, range, variance, standard deviation</td>
+            <td>Hypothesis testing, t-tests, ANOVA, regression</td>
+        </tr>
+        <tr>
+            <td>Population vs. Sample</td>
+            <td>Describes a single data set</td>
+            <td>Generalizes from a sample</td>
+        </tr>
+        <tr>
+            <td>Measures of Central Tendency</td>
+            <td>Mean, median, mode</td>
+            <td>Point estimates (e.g., sample mean)</td>
+        </tr>
+        <tr>
+            <td>Variability</td>
+            <td>Range, variance, standard deviation</td>
+            <td>Confidence intervals, standard error</td>
+        </tr>
+        <tr>
+            <td>Data Visualization</td>
+            <td>Histograms, box plots, scatter plots</td>
+            <td>Probability distributions, graphs, charts</td>
+        </tr>
+        <tr>
+            <td>Goal</td>
+            <td>Understand the data's characteristics</td>
+            <td>Make inferences about the population based on the sample</td>
+        </tr>
+        <tr>
+            <td>Examples of Analyses</td>
+            <td>Calculate average test scores for a class</td>
+            <td>Test if there is a significant difference in test scores between two groups</td>
+        </tr>
+    </table>
+    </div>
+
+
+    <div class="content">
+      <div class="text">
+        <h2>Sample vs Population Estimates</h2>
+        <p>When we are working with data, we are often interested in the characteristics of a population. However, it is often impractical or impossible to collect data from every member of a population. Instead, we collect data from a sample of the population and use that data to make inferences about the population. </p>
+        <p>For example, if we want to know the average height of all people in the world, it would be impossible to measure the height of every person. Instead, we could collect data from a sample of people and use that data to estimate the average height of the population.</p>  
+      </div>
+      <div class="images">
+        <img src="https://www.questionpro.com/blog/wp-content/uploads/2019/05/Population-and-Sample-table_1.jpg" alt="" class="remove">
+        <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/population_vs_sample.jpg" alt="" class="replace">
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="text">
+        <h2>Sampling Distribution</h2>
+        <p>A sampling distribution is a probability distribution of a statistic based on a random sample. It is a theoretical distribution that represents the distribution of a statistic if we were to take an infinite number of samples of the same size from the same population. </p>
+        <p>For example, if we were to take an infinite number of samples of size 100 from a population, the sampling distribution of the sample mean would represent the distribution of the sample means. </p>
+      </div>
+      <div class="images">
+        <img src="sampling_plot1.jpeg" alt="" class="remove">
+        <img src="sampling_plot.jpeg" alt="" class="replace">
+      </div>
+    </div>
+
+    <div class="math">
+      <h2>Sampling With/Without Replacement</h2>
+      <p>When we take a sample from a population, we can either sample with replacement or without replacement. Sampling with replacement means that we replace each sample back into the population before taking the next sample. Sampling without replacement means that we do not replace each sample back into the population before taking the next sample. </p>
+      <p>For example, if we have a population of 10 people and we want to take a sample of 3 people, we could either sample with replacement or without replacement. If we sample with replacement, we would take the first sample, replace it back into the population, and then take the second sample. If we sample without replacement, we would take the first sample, remove it from the population, and then take the second sample. </p>
+      <div class="image"><img src="https://o.quizlet.com/BDv.OBHjW.LQNEfNv3eP-g.jpg" style = "width:60%" alt=""></div>
+    </div>
+
+    <div class="math">
+      <h2>Central Limit Theorm</h2>
+      <p>The central limit theorem states that the sampling distribution of the sample mean approaches a normal distribution as the sample size gets larger. This is true regardless of the shape of the population distribution. </p>
+      <p>For example, if we take an infinite number of samples of size 100 from a population, the sampling distribution of the sample mean would represent the distribution of the sample means. </p>
+      <table>
+        <tr>
+            <th>Key Point</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Theorem Definition</td>
+            <td>The Central Limit Theorem (CLT) states that the sample mean of a sufficiently large number of random variables approaches a normal distribution, regardless of the original population distribution.</td>
+        </tr>
+        <tr>
+            <td>Applicability</td>
+            <td>The CLT is applicable to various probability distributions, provided the sample size is sufficiently large (usually n > 30).</td>
+        </tr>
+        <tr>
+            <td>Key Assumptions</td>
+            <td>The CLT relies on random sampling, independence of samples, and a sufficiently large sample size.</td>
+        </tr>
+        <tr>
+            <td>Resulting Distribution</td>
+            <td>The distribution of sample means becomes normal as the sample size increases, with properties similar to the normal distribution.</td>
+        </tr>
+        <tr>
+            <td>Properties of Normal Distribution</td>
+            <td>The resulting normal distribution has a mean equal to the population mean and a standard deviation equal to the population standard deviation divided by √n.</td>
+        </tr>
+        <tr>
+            <td>Importance in Statistics</td>
+            <td>The CLT is fundamental for hypothesis testing, confidence intervals, and statistical procedures used in various fields.</td>
+        </tr>
+        <tr>
+            <td>Sample Size Consideration</td>
+            <td>Larger sample sizes provide a better approximation to the normal distribution, but smaller sample sizes may require different approaches.</td>
+        </tr>
+        <tr>
+            <td>Limitations</td>
+            <td>The CLT assumes independence and identical distribution of random variables and may not apply well to extremely skewed or non-normal populations.</td>
+        </tr>
+        <tr>
+            <td>Practical Implications</td>
+            <td>Understanding the CLT is crucial for making reliable inferences about populations from sample statistics in real-world applications.</td>
+        </tr>
+    </table>
+    <h2>How the geniuses figured this out?</h2>
+    <p>
+      The probability density function (PDF) of a normal distribution is given by: <br>
+\[f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x - \mu)^2}{2\sigma^2}}\]
+
+The mean of the normal distribution is μ, which can be calculated as: <br>
+\[\mu = \int_{-\infty}^{\infty} x\cdot f(x) \, dx = \int_{-\infty}^{\infty} x \cdot \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x - \mu)^2}{2\sigma^2}} \, dx\] 
+
+The variance of the distribution is σ^2, and the variance of the sample mean (\(SE^2\)) is given by: <br>
+\[SE^2 = \frac{\sigma^2}{n}\]
+
+To find the standard error (\(SE\)), take the square root of \(SE^2\): <br>
+\[SE = \sqrt{\frac{\sigma^2}{n}}\]
+    </p>
+    </div>
+
+    <div class="math">
+      <h2>Impact of sampling on measures of Central tendencey and measures of Uncertainty</h2>
+      <p>Let's start with an example first, We sampled IQ scores from a population of York University students. The population mean is 100, and the population sd = 15.</p>
+      <ul>
+        <li>What would be the sample mean?</li>
+        <li>What would be the sample sd?</li>
+      </ul>
+      <p>Now, let's say we sample from the same population 25 times, but this time we sample with replacement.</p>
+      <ul>
+        <li>What would be mean of each sample?</li>
+        <li>What would be the mean of each sd?</li>
+        <li>What if we took the mean of the mean for all samples?</li>
+        <li>What if we took the mean of the sd for all samples?</li>
+      </ul>
+
+        <table>
+          <tr>
+              <th>Sample</th>
+              <th>Mean</th>
+              <th>Standard Deviation (sd)</th>
+          </tr>
+          <tr>
+              <td>Sample 1</td>
+              <td>98.40939</td>
+              <td>16.70981</td>
+          </tr>
+          <tr>
+              <td>Sample 2</td>
+              <td>98.22167</td>
+              <td>14.05585</td>
+          </tr>
+          <tr>
+              <td>Sample 3</td>
+              <td>97.56042</td>
+              <td>14.29149</td>
+          </tr>
+          <tr>
+              <td>Sample 4</td>
+              <td>106.4766</td>
+              <td>12.32467</td>
+          </tr>
+          <tr>
+              <td>Sample 5</td>
+              <td>93.54612</td>
+              <td>18.14106</td>
+          </tr>
+          <tr>
+              <td>Sample 6</td>
+              <td>99.89992</td>
+              <td>12.17399</td>
+          </tr>
+          <tr>
+              <td>Sample 7</td>
+              <td>97.40225</td>
+              <td>11.74773</td>
+          </tr>
+          <tr>
+              <td>Sample 8</td>
+              <td>99.31409</td>
+              <td>15.15428</td>
+          </tr>
+          <tr>
+              <td>Sample 9</td>
+              <td>95.99861</td>
+              <td>14.27441</td>
+          </tr>
+          <tr>
+              <td>Sample 10</td>
+              <td>102.3261</td>
+              <td>13.00225</td>
+          </tr>
+          <tr>
+              <td>Sample 11</td>
+              <td>98.52766</td>
+              <td>15.29764</td>
+          </tr>
+          <tr>
+              <td>Sample 12</td>
+              <td>96.14758</td>
+              <td>16.9009</td>
+          </tr>
+          <tr>
+              <td>Sample 13</td>
+              <td>96.2188</td>
+              <td>12.42575</td>
+          </tr>
+          <tr>
+              <td>Sample 14</td>
+              <td>94.95078</td>
+              <td>12.34689</td>
+          </tr>
+          <tr>
+              <td>Sample 15</td>
+              <td>100.1632</td>
+              <td>12.23751</td>
+          </tr>
+          <tr>
+              <td>Sample 16</td>
+              <td>104.6696</td>
+              <td>17.5369</td>
+          </tr>
+          <tr>
+              <td>Sample 17</td>
+              <td>102.2153</td>
+              <td>15.26406</td>
+          </tr>
+          <tr>
+              <td>Sample 18</td>
+              <td>101.4365</td>
+              <td>13.00216</td>
+          </tr>
+          <tr>
+              <td>Sample 19</td>
+              <td>95.2306</td>
+              <td>19.02714</td>
+          </tr>
+          <tr>
+              <td>Sample 20</td>
+              <td>98.50253</td>
+              <td>12.75522</td>
+          </tr>
+          <tr>
+              <td>Sample 21</td>
+              <td>101.0368</td>
+              <td>19.41009</td>
+          </tr>
+          <tr>
+              <td>Sample 22</td>
+              <td>95.94648</td>
+              <td>15.46717</td>
+          </tr>
+          <tr>
+              <td>Sample 23</td>
+              <td>96.0678</td>
+              <td>16.93917</td>
+          </tr>
+          <tr>
+              <td>Sample 24</td>
+              <td>98.18633</td>
+              <td>13.61956</td>
+          </tr>
+          <tr>
+              <td>Sample 25</td>
+              <td>94.6171</td>
+              <td>20.6075</td>
+          </tr>
+      </table>
+      <div class="image"><img src="p1.jpeg" alt="" style = "width:50%; margin-bottom:20px;"></div>
+      <div class="image"><img src="p2.jpeg" alt="" style = "width:50%"></div>
+      <p>But what if we took the standard deviation for all the means? What information does that tell us?</p>
+    </div>
+
+    <div class="math">
+      <h2>Standard Error</h2>
+      <p>The standard error is a measure of the variability of a statistic. It is the standard deviation of the sampling distribution of a statistic. The standard error is calculated as:</p>
+      <p>The standard error of the mean (SEM) is a measure of the variability or uncertainty in the sample mean of a set of data points. It quantifies how much the sample mean is likely to vary from the true population mean. In other words, it provides an estimate of the precision of the sample mean.</p>
+      <p>\[\text{Standard Error} = \frac{\sigma}{\sqrt{n}}\]</p>
+      <p>The SE of the mean is often used in inferential statistics to calculate confidence intervals and to perform hypothesis testing, such as t-tests. A smaller SEM indicates a more precise estimate of the population mean, while a larger SEM suggests more variability in the sample mean.</p>
+    </div>
+
+    <div class="math">
+    
+      <h2>Practice Problems for Estimating the SE</h2>
+      <div class="quest">
+              <p><strong>Sample Standard Error Calculation:</strong></p>
+              <p>You have a sample of 50 students' test scores in a class. The sample mean is 75, and the sample standard deviation is 10. Calculate the standard error of the mean for this sample.</p>
+
+              <p><strong>Sample Size and Standard Error:</strong></p>
+              <p>A study on a population of 1,000 individuals uses a sample size of 100. If the population standard deviation is 5, calculate the standard error of the mean for this sample.</p>
+
+              <p><strong>Comparing Standard Errors:</strong></p>
+              <p>You have two different datasets: Dataset A and Dataset B. Dataset A has a sample size of 30 and a standard deviation of 12, while Dataset B has a sample size of 60 and a standard deviation of 8. Compare the standard errors of the means for both datasets and explain the implications.</p>
+
+              <p><strong>Sampling Distribution and Standard Error:</strong></p>
+              <p>In a survey of 200 households, the average annual income was $50,000 with a standard deviation of $10,000. If you take all possible samples of 30 households from this population, calculate the standard error of the mean for the sampling distribution.</p>
+
+              <p><strong>Effect of Sample Size:</strong></p>
+              <p>You are conducting a study on the heights of a certain population. Calculate the standard error of the mean for the population with a sample size of 50 and then with a sample size of 200. Discuss how the standard error changes as the sample size increases.</p>
+            </div>
+    </div>
+
+    <div class="math">
+      <h2>Practice Solutions</h2>
+      <div class="quest">
+        <p><strong>Problem 1: Sample Standard Error Calculation</strong></p>
+    <p>
+        Given a sample of 50 students' test scores with a sample mean (\(\bar{x}\)) of 75 and a sample standard deviation (\(s\)) of 10, we can calculate the standard error (\(SE\)) using the formula:
+        \[SE = \frac{s}{\sqrt{n}}\]
+        Substituting the values, we get:
+        \[SE = \frac{10}{\sqrt{50}} \approx 1.41\]
+        So, the standard error of the mean is approximately 1.41.
+    </p>
+
+    <p><strong>Problem 2: Sample Size and Standard Error</strong></p>
+    <p>
+        In a study with a sample size (\(n\)) of 100 from a population with a standard deviation (\(\sigma\)) of 5, the standard error (\(SE\)) can be calculated as:
+        \[SE = \frac{\sigma}{\sqrt{n}}\]
+        Substituting the values:
+        \[SE = \frac{5}{\sqrt{100}} = 0.5\]
+        So, the standard error of the mean is 0.5.
+    </p>
+
+    <p><strong>Problem 3: Comparing Standard Errors</strong></p>
+    <p>
+        For Dataset A with a sample size (\(n\)) of 30 and a standard deviation (\(s\)) of 12, the standard error (\(SE_A\)) is:
+        \[SE_A = \frac{s}{\sqrt{n}} = \frac{12}{\sqrt{30}}\]
+        For Dataset B with a sample size (\(n\)) of 60 and a standard deviation (\(s\)) of 8, the standard error (\(SE_B\)) is:
+        \[SE_B = \frac{s}{\sqrt{n}} = \frac{8}{\sqrt{60}}\]
+        Comparing \(SE_A\) and \(SE_B\), you can determine which dataset provides a more precise estimate of the population mean.
+    </p>
+
+    <p><strong>Problem 4: Sampling Distribution and Standard Error</strong></p>
+    <p>
+        In a survey of 200 households, the average annual income (\(\bar{x}\)) was $50,000 with a standard deviation (\(s\)) of $10,000. To calculate the standard error (\(SE\)) of the mean for the sampling distribution, you can use the formula:
+        \[SE = \frac{s}{\sqrt{n}}\]
+        Substituting the values:
+        \[SE = \frac{10,000}{\sqrt{30}}\]
+    </p>
+
+    <p><strong>Problem 5:</strong> You are conducting a study on the heights of a certain population. Calculate the standard error of the mean for the population with a sample size of 50 and then with a sample size of 200. Discuss how the standard error changes as the sample size increases.</p>
+
+    <p>Solution: The standard error of the mean (\(SE\)) can be calculated using the formula:
+        \[
+        SE = \frac{\sigma}{\sqrt{n}}
+        \]
+        where:
+        - \(\sigma\) is the population standard deviation.
+        - \(n\) is the sample size.
+
+        Let's calculate \(SE\) for two different sample sizes: 50 and 200.
+
+        <p>Sample Size = 50:</p>
+        - Assume the population standard deviation (\(\sigma\)) is known to be 5 inches (this is just an example value).
+        - The sample size (\(n\)) is 50.
+        \[
+        SE_{50} = \frac{5}{\sqrt{50}} \approx 0.707
+        \]
+
+        <p>Sample Size = 200:</p>
+        - Using the same population standard deviation (\(\sigma\)) of 5 inches.
+        - The sample size (\(n\)) is 200.
+        \[
+        SE_{200} = \frac{5}{\sqrt{200}} \approx 0.354
+        \]
+
+        <p>Discussion:</p> As observed from the calculations, the standard error (\(SE\)) decreases as the sample size increases. With a larger sample size (200), the standard error is smaller (0.354) compared to the standard error with a smaller sample size (50, where \(SE\) is 0.707). A smaller standard error implies a more precise estimate of the population mean. This aligns with the Central Limit Theorem, where larger sample sizes lead to more accurate estimates of population parameters, making researchers prefer larger samples for more reliable and precise results.
+    </p>
+      </div>
+    </div>
+</body>
+</html>
